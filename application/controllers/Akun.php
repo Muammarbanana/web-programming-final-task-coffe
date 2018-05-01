@@ -6,13 +6,15 @@ class Akun extends CI_Controller
         parent::__construct();
         $this->load->model('ModelKeluhan');
         $this->load->model('ModelAkun');
+        $this->load->model('ModelArtikel');
     }
     public function index()
     {
-        $datakeluhan = array(
-          'keluhan' => $this->ModelKeluhan->get_data()
+        $data_semua = array(
+          'keluhan' => $this->ModelKeluhan->get_data(),
+          'artikel' => $this->ModelArtikel->get_data_artikel()
         );
-        $this->load->view('index',$datakeluhan);
+        $this->load->view('index',$data_semua);
     }
 
     public function daftar_akun()

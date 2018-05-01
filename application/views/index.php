@@ -55,34 +55,39 @@
 </header>
 <body>
 	<div id="section1" class="container-fluid">
-		<?php for ($i=0; $i < 2; $i++) {
-
-			?>
-			<div class="content-home">
-				<h4><small>RECENT POSTS</small></h4>
-				<hr>
-				<h2>Lorem Blogging</h2>
-				<h5><span class="glyphicon glyphicon-time"></span> Post by wtrey, Feb 28, 2018.</h5>
-				<h5><span class="label label-success">Lorem</span></h5><br>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				<hr>
-				<div class="commentbox-app">
-					<div class="container">
-						<h1 class="heading">Leave a Comment:</h1>
-						<div class="clearfix">
-							<form id="comment-form">
-								<textarea type="text" id="comment-input" rows="3" class="form-control" placeholder="Masukkan Komentar Anda"></textarea>
-								<button type="submit" class="btn btn-success">Submit</button>
-							</form>
-						</div>
-
-						<ul id="comment-stream" class="comment-stream"></ul>
-						<button type="submit" class="btn-danger" name="button" id="remove-all">Remove</button>
+		<?php foreach ($artikel as $art): ?>
+		<div class="content-home">
+			<h4><small>RECENT POSTS</small></h4>
+			<hr>
+			<h2><?php echo $art->judul; ?></h2>
+			<h5><span class="glyphicon glyphicon-time"></span> Post <?php echo $art->penulis; ?>, <?php echo $art->tanggal; ?>.</h5>
+			<h5><span class="label label-success"><?php echo $art->kategori; ?></span></h5><br>
+			<p><?php echo $art->artikel; ?></p>
+			<hr>
+			<div class="commentbox-app">
+				<div class="container">
+					<h1 class="heading">Leave a Comment:</h1>
+					<div class="clearfix">
+						<form id="comment-form<?php echo $art->id; ?>">
+							<textarea type="text" id="comment-input<?php echo $art->id; ?>" rows="3" class="form-control" placeholder="Masukkan Komentar Anda"></textarea>
+							<button type="submit" class="btn btn-success" style="margin-top:1%">Submit</button>
+							<button type="submit" class="btn btn-danger" name="button" id="remove-all<?php echo $art->id; ?>" style="margin-top:1%">Remove</button>
+						</form>
 					</div>
+					<table class="table table-striped" style="margin-top:1%">
+						<tbody>
+							<tr>
+								<td>
+									<ul id="comment-stream<?php echo $art->id; ?>" style="color:#000" class="comment-stream"></ul>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<br><br>
 			</div>
-		<?php } ?>
+			<br><br>
+		</div>
+		<?php endforeach; ?>
 	</div>
 	<div id="section2" class="container-fluid">
 		<div class="content-home">
@@ -373,7 +378,8 @@ $(document).ready(function(){
 	});
 });
 </script>
-<script type="text/javascript">
+<?php foreach ($artikel as $art): ?>
+<script type="text/javascript" id="<?php echo $art->id; ?>">
 function supportsLocalStorage () {
 	return typeof localStorage !== 'undefined';
 }
@@ -395,7 +401,7 @@ function saveComment (comments, commentStr, action) {
 function appendToStream(stream, str, index) {
 	var li = document.createElement('LI');
 	li.setAttribute('data-index', index);
-	li.innerHTML = str + ' --- Anonymous ';
+	li.innerHTML = str + '';
 	stream.appendChild(li);
 }
 
@@ -418,15 +424,15 @@ if (supportsLocalStorage()) {
 }
 
 function initApp() {
-	var commentForm = document.getElementById('comment-form'),
-	commentList = document.getElementById('comment-stream'),
-	commentInput = document.getElementById('comment-input'),
-	removeAll = document.getElementById('remove-all');
+	var commentForm = document.getElementById('comment-form<?php echo $art->id; ?>'),
+	commentList<?php echo $art->id; ?> = document.getElementById('comment-stream<?php echo $art->id; ?>'),
+	commentInput = document.getElementById('comment-input<?php echo $art->id; ?>'),
+	removeAll = document.getElementById('remove-all<?php echo $art->id; ?>');
 
-	loadComments(commentList);
+	loadComments(commentList<?php echo $art->id; ?>);
 
 	removeAll.addEventListener('click', function() {
-		clearComments(commentList);
+		clearComments(commentList<?php echo $art->id; ?>);
 	}, true);
 
 	commentForm.addEventListener('submit', function (event) {
@@ -442,13 +448,14 @@ function initApp() {
 
 			comments.push(value);
 			localStorage.setItem('comments', JSON.stringify(comments));
-			appendToStream(commentList, commStr);
+			appendToStream(commentList<?php echo $art->id; ?>, commStr);
 			commentInput.value = '';
 		});
 
 	}, true);
 }
 </script>
+<?php endforeach; ?>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
