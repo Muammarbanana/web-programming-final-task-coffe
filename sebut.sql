@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2018 at 06:48 PM
+-- Generation Time: May 16, 2018 at 07:16 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -85,9 +85,33 @@ CREATE TABLE `keluhan` (
 --
 
 INSERT INTO `keluhan` (`id`, `nama`, `username`, `keluhan`) VALUES
-(1, 'Alam Fajaray', 'alamdhe', 'Webnya kok jelek sih anjing'),
-(5, 'Alam Fajaray', 'alamdhe', 'Memek tiga'),
+(1, 'Alam Fajaray', 'alamdhe', 'Webnya kok jelek sih'),
+(5, 'Alam Fajaray', 'alamdhe', 'Bintang tiga'),
 (8, 'Fanan ninini', 'test', 'Perutku sakit');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `komentar`
+--
+
+CREATE TABLE `komentar` (
+  `idkomentar` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `komentar` varchar(100) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `tanggal` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `komentar`
+--
+
+INSERT INTO `komentar` (`idkomentar`, `id`, `komentar`, `username`, `tanggal`) VALUES
+(3, 6, 'Wah, sangat bermanfaat sekali artikelnya', 'alamdhe', '2018-05-16'),
+(4, 6, 'Sering-sering update ya\r\n', 'alamdhe', '2018-05-16'),
+(5, 1, 'Artikelnya mantab sekali ini bos\r\n', 'test', '2018-05-16'),
+(6, 1, 'kunjungi blog saya juga ya, www.makanmakan.tk', 'test', '2018-05-16');
 
 --
 -- Indexes for dumped tables
@@ -112,6 +136,12 @@ ALTER TABLE `keluhan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `komentar`
+--
+ALTER TABLE `komentar`
+  ADD PRIMARY KEY (`idkomentar`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -126,6 +156,12 @@ ALTER TABLE `artikel`
 --
 ALTER TABLE `keluhan`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `komentar`
+--
+ALTER TABLE `komentar`
+  MODIFY `idkomentar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
