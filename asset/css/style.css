@@ -114,6 +114,11 @@ input{
     margin: 4%;
 }
 
+.content-product{
+	width: 25%;
+	border-radius: 4px;
+}
+
 #formlogin{
 	display: -webkit-flex;
 	display: flex;

@@ -8,13 +8,15 @@ class Akun extends CI_Controller
     $this->load->model('ModelAkun');
     $this->load->model('ModelArtikel');
     $this->load->model('ModelKomentar');
+    $this->load->model('ModelProduk');
   }
   public function index()
   {
     $data_semua = array(
       'keluhan' => $this->ModelKeluhan->get_data(),
       'artikel' => $this->ModelArtikel->get_data_artikel(),
-      'komentar' => $this->ModelKomentar->get_data_komentar()
+      'komentar' => $this->ModelKomentar->get_data_komentar(),
+      'produk' => $this->ModelProduk->get_data_produk()
     );
     $this->load->view('index',$data_semua);
   }

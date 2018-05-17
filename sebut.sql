@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2018 at 07:16 PM
+-- Generation Time: May 17, 2018 at 05:38 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -113,6 +113,30 @@ INSERT INTO `komentar` (`idkomentar`, `id`, `komentar`, `username`, `tanggal`) V
 (5, 1, 'Artikelnya mantab sekali ini bos\r\n', 'test', '2018-05-16'),
 (6, 1, 'kunjungi blog saya juga ya, www.makanmakan.tk', 'test', '2018-05-16');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `produk`
+--
+
+CREATE TABLE `produk` (
+  `idproduk` int(11) NOT NULL,
+  `namaproduk` varchar(20) NOT NULL,
+  `deskripsi` varchar(300) NOT NULL,
+  `gambar` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `produk`
+--
+
+INSERT INTO `produk` (`idproduk`, `namaproduk`, `deskripsi`, `gambar`) VALUES
+(1, 'Donut', 'Kami menyediakan berbagai macam rasa donut yang sangat mengiurkan lidah anda. yang di buat oleh para pembuat kue kami yang berpengalaman. jadi tunggu apa lagi? dapatkan di kedai kami sekarang', 'https://i.imgur.com/CkC2xT3.jpg'),
+(2, 'Waffle', 'Waffle yang istimewa, yang juga di buat oleh para pembubat kue hebat kami, sehingga menghasilkan hasil yang memuaskan. Waffle tersedia dalam variant rasa tersedia di kedai kami', 'https://i.imgur.com/TCdlKqz.jpg'),
+(3, 'Soft Cake', 'Kelembutan cake dan rasa yang lumer di dalam mulut bisa anda dapatkan pada soft cake ini. di buat dengan bahan terpilih yang mempunyai kualitas teratas. dapatkan sekarang di kedai kami', 'https://i.imgur.com/96ID1d4.jpg'),
+(4, 'Kopi Moccacino', 'harum dan rasa lembut foam mochanya sangat menggugah anda. di racik oleh para barista barista kami yang sudah professional. dapatkan langsung di kedai kami', 'https://i.imgur.com/LpKPepp.jpg'),
+(5, 'Fruit Juice', 'kesegaran dari buah buah yang natural dan di ambil dari distributor yang bagus dijadikan bermacam-macam jus ada di kedai kami. sangat bermanfaat bagi tubuh anda dan kaya akan vitamin', 'https://i.imgur.com/zewqETc.jpg');
+
 --
 -- Indexes for dumped tables
 --
@@ -142,6 +166,12 @@ ALTER TABLE `komentar`
   ADD PRIMARY KEY (`idkomentar`);
 
 --
+-- Indexes for table `produk`
+--
+ALTER TABLE `produk`
+  ADD PRIMARY KEY (`idproduk`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -162,6 +192,12 @@ ALTER TABLE `keluhan`
 --
 ALTER TABLE `komentar`
   MODIFY `idkomentar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `produk`
+--
+ALTER TABLE `produk`
+  MODIFY `idproduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
